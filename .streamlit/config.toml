@@ -1,0 +1,16 @@
+# ============================================================
+#  AgriDoctor — Streamlit Configuration
+# ============================================================
+
+[server]
+maxUploadSize = 10
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+primaryColor      = "#4a8c3f"
+backgroundColor   = "#f4f7f0"
+secondaryBackgroundColor = "#e8f5e3"
+textColor         = "#1f2328"
+font              = "sans serif"

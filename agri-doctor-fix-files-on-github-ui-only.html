@@ -1,0 +1,262 @@
+
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Agri Doctor — GitHub UI Fix Guide</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+    font-size: 14px; line-height: 1.6;
+    background: #fff; color: #1f2328;
+    max-width: 760px; margin: 0 auto; padding: 32px 24px 48px;
+  }
+  h1 { font-size: 1.45rem; font-weight: 700; color: #2d5a27; margin-bottom: 4px; }
+  .subtitle { color: #57606a; font-size: 0.88rem; margin-bottom: 28px; }
+
+  /* Phase banners */
+  .phase {
+    background: linear-gradient(135deg, #2d5a27, #4a8c3f);
+    color: #fff; border-radius: 8px;
+    padding: 10px 18px; font-weight: 700; font-size: 0.95rem;
+    margin: 28px 0 16px;
+  }
+
+  /* Step rows */
+  .step { display: flex; gap: 14px; margin-bottom: 16px; align-items: flex-start; }
+  .num {
+    min-width: 30px; height: 30px; border-radius: 50%;
+    background: #2d5a27; color: #fff;
+    font-weight: 700; font-size: 0.82rem;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .step-body { flex: 1; }
+  .step-body strong { color: #1f2328; }
+  .step-body p { color: #3d4f38; margin-top: 4px; }
+
+  /* Boxes */
+  .box { border-radius: 8px; padding: 12px 16px; margin: 10px 0 14px; font-size: 0.88rem; line-height: 1.6; }
+  .green  { background: #f0f8ec; border: 1px solid #c3ddb8; color: #2d5a27; }
+  .red    { background: #fde8e8; border: 1px solid #f5c6c6; color: #991b1b; }
+  .amber  { background: #fff8e6; border: 1px solid #f5dfa0; color: #856404; }
+  .blue   { background: #eef4ff; border: 1px solid #c3d4f5; color: #1a3a6b; }
+
+  code {
+    background: #f7f8fa; border: 1px solid #e5e7eb;
+    border-radius: 4px; padding: 1px 6px;
+    font-family: "Consolas","Courier New",monospace; font-size: 0.82rem;
+    color: #2d5a27;
+  }
+
+  /* File table */
+  table { width: 100%; border-collapse: collapse; margin: 10px 0 16px; font-size: 0.85rem; }
+  th { background: #f7f8fa; border: 1px solid #e5e7eb; padding: 7px 10px; font-weight: 600; text-align: left; }
+  td { border: 1px solid #e5e7eb; padding: 7px 10px; vertical-align: top; }
+  .new  { color: #2d5a27; font-weight: 700; }
+  .upd  { color: #856404; font-weight: 600; }
+  .skip { color: #57606a; }
+  td code { background: none; border: none; padding: 0; }
+
+  /* How-to box */
+  .howto {
+    background: #f7f8fa; border: 1px solid #e5e7eb;
+    border-radius: 8px; padding: 14px 18px; margin: 10px 0 16px;
+  }
+  .howto h4 { font-size: 0.9rem; color: #2d5a27; margin-bottom: 8px; }
+  .howto ol { padding-left: 20px; }
+  .howto ol li { margin-bottom: 6px; color: #3d4f38; }
+
+  hr { border: none; border-top: 1px solid #e5e7eb; margin: 24px 0; }
+  footer { text-align: center; color: #57606a; font-size: 0.75rem; margin-top: 48px; padding-top: 16px; border-top: 1px solid #e5e7eb; }
+</style>
+</head>
+<body>
+
+<h1>🌿 Fix Agri Doctor on GitHub — Web UI Only</h1>
+<p class="subtitle">No terminal needed · Update 13 files on <a href="https://github.com/AayushRehal/agri-doctor">github.com/AayushRehal/agri-doctor</a></p>
+
+<div class="box blue">
+  <strong>What happened:</strong> All files were uploaded flat to the repo root with no subfolders.
+  Python can't find <code>ui/styles.py</code> or <code>agents/orchestrator.py</code> etc.<br /><br />
+  <strong>The fix:</strong> Update 12 files to use direct imports, and add 1 new file (<code>guardrails_base.py</code>).
+  Every file already has the fixed content on your computer — you just need to copy-paste it to GitHub.
+</div>
+
+
+<div class="phase">How to edit a file on GitHub (do this for every file below)</div>
+
+<div class="howto">
+  <h4>Repeat these 5 clicks for each file:</h4>
+  <ol>
+    <li>Go to <strong><a href="https://github.com/AayushRehal/agri-doctor">github.com/AayushRehal/agri-doctor</a></strong></li>
+    <li>Click the <strong>filename</strong> in the file list</li>
+    <li>Click the <strong>pencil icon ✏️</strong> (top-right of the file content area, says "Edit this file")</li>
+    <li>Press <strong>Ctrl+A</strong> to select all → <strong>Delete</strong> → <strong>paste</strong> the new content</li>
+    <li>Scroll down → click <strong>"Commit changes"</strong> → click <strong>"Commit directly to main"</strong> → <strong>"Commit changes"</strong></li>
+  </ol>
+</div>
+
+
+<div class="phase">Phase 1 — Add 1 new file (guardrails_base.py)</div>
+
+<div class="step">
+  <div class="num">1</div>
+  <div class="step-body">
+    <strong>Create new file: <code>guardrails_base.py</code></strong><br />
+    <p>On GitHub → click <strong>"Add file" → "Create new file"</strong><br />
+    In the filename box type: <code>guardrails_base.py</code><br />
+    Then paste the content from: <code>C:\EdunetFoundation\Bob Work\AgriDoctor\guardrails_base.py</code><br />
+    Click <strong>Commit changes → Commit directly to main</strong></p>
+  </div>
+</div>
+
+
+<div class="phase">Phase 2 — Update 12 existing files</div>
+
+<p style="margin-bottom:12px;color:#3d4f38">For each file: open it on GitHub → ✏️ edit → Ctrl+A → Delete → paste from your local file → Commit.</p>
+
+<table>
+  <tr>
+    <th>#</th>
+    <th>File to click on GitHub</th>
+    <th>Paste content from this local file</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td><code>app.py</code></td>
+    <td><code>AgriDoctor\app.py</code></td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td><code>pathologist.py</code></td>
+    <td><code>AgriDoctor\agents\pathologist.py</code></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td><code>extension_officer.py</code></td>
+    <td><code>AgriDoctor\agents\extension_officer.py</code></td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td><code>orchestrator.py</code></td>
+    <td><code>AgriDoctor\agents\orchestrator.py</code></td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td><code>home_tab.py</code></td>
+    <td><code>AgriDoctor\ui\home_tab.py</code></td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td><code>recommendations_tab.py</code></td>
+    <td><code>AgriDoctor\ui\recommendations_tab.py</code></td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td><code>evaluation_tab.py</code></td>
+    <td><code>AgriDoctor\ui\evaluation_tab.py</code></td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td><code>input_guardrails.py</code></td>
+    <td><code>AgriDoctor\guardrails\input_guardrails.py</code></td>
+  </tr>
+  <tr>
+    <td>9</td>
+    <td><code>output_guardrails.py</code></td>
+    <td><code>AgriDoctor\guardrails\output_guardrails.py</code></td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td><code>security_guardrails.py</code></td>
+    <td><code>AgriDoctor\guardrails\security_guardrails.py</code></td>
+  </tr>
+  <tr>
+    <td>11</td>
+    <td><code>agent_communication.py</code></td>
+    <td><code>AgriDoctor\guardrails\agent_communication.py</code></td>
+  </tr>
+  <tr>
+    <td>12</td>
+    <td><code>agricultural_safety.py</code></td>
+    <td><code>AgriDoctor\guardrails\agricultural_safety.py</code></td>
+  </tr>
+</table>
+
+<div class="box amber">
+  <strong>How to open a local file and copy its content:</strong><br />
+  Open Windows Explorer → navigate to the path shown → right-click the file → <strong>Open with → Notepad</strong> → Press <strong>Ctrl+A</strong> → <strong>Ctrl+C</strong> → paste into GitHub editor.
+</div>
+
+
+<div class="phase">Phase 3 — Verify on GitHub</div>
+
+<div class="step">
+  <div class="num">1</div>
+  <div class="step-body">
+    <strong>Check the repo has <code>guardrails_base.py</code></strong><br />
+    <p>Go to <a href="https://github.com/AayushRehal/agri-doctor">github.com/AayushRehal/agri-doctor</a> and confirm <code>guardrails_base.py</code> appears in the file list.</p>
+  </div>
+</div>
+<div class="step">
+  <div class="num">2</div>
+  <div class="step-body">
+    <strong>Confirm <code>.env</code> is NOT in the repo</strong><br />
+    <p>Scroll through the file list — there must be no <code>.env</code> file. If you see one, click it → ✏️ edit → delete all content → commit (or delete the file entirely).</p>
+  </div>
+</div>
+
+
+<div class="phase">Phase 4 — Redeploy on Streamlit Cloud</div>
+
+<div class="step">
+  <div class="num">1</div>
+  <div class="step-body">
+    <strong>Go to <a href="https://share.streamlit.io">share.streamlit.io</a></strong><br />
+    <p>Your app will have automatically started redeploying after each commit. Wait for the spinner to finish.</p>
+  </div>
+</div>
+<div class="step">
+  <div class="num">2</div>
+  <div class="step-body">
+    <strong>If it doesn't redeploy automatically</strong><br />
+    <p>Click the <strong>⋮ menu</strong> on your app → <strong>Reboot app</strong></p>
+  </div>
+</div>
+<div class="step">
+  <div class="num">3</div>
+  <div class="step-body">
+    <strong>Check Secrets are set</strong><br />
+    <p>Click <strong>⋮ → Settings → Secrets</strong> and confirm all 5 lines are there:</p>
+    <table>
+      <tr><th>Key</th><th>Value</th></tr>
+      <tr><td><code>WATSONX_API_KEY</code></td><td>your IBM Cloud API key</td></tr>
+      <tr><td><code>WATSONX_PROJECT_ID</code></td><td>your watsonx.ai Project ID</td></tr>
+      <tr><td><code>WATSONX_URL</code></td><td><code>https://us-south.ml.cloud.ibm.com</code></td></tr>
+      <tr><td><code>WATSONX_VISION_MODEL</code></td><td><code>mistralai/mistral-small-3-1-24b-instruct-2503</code></td></tr>
+      <tr><td><code>WATSONX_MODEL_ID</code></td><td><code>ibm/granite-4-h-small</code></td></tr>
+    </table>
+  </div>
+</div>
+<div class="step">
+  <div class="num">4</div>
+  <div class="step-body">
+    <strong>Open your live app</strong><br />
+    <p>Your app URL: <strong>https://aayushagriculturist.streamlit.app</strong><br />
+    You should see the green Agri Doctor header with no error. Upload a crop photo and click <strong>Analyse Crop</strong>.</p>
+  </div>
+</div>
+
+<div class="box green">
+  <strong>✅ Expected result after all updates:</strong><br />
+  — No <code>ModuleNotFoundError</code> in the logs<br />
+  — Green header appears<br />
+  — No credential warning banner (secrets are set)<br />
+  — Diagnosis runs in ~15 seconds
+</div>
+
+<footer>Agri Doctor · GitHub UI Fix Guide · Made with IBM Bob</footer>
+</body>
+</html>

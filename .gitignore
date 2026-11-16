@@ -1,0 +1,45 @@
+﻿# ============================================================
+#  AgriDoctor — Git Ignore Rules
+# ============================================================
+
+# ── Credentials — NEVER commit these ─────────────────────
+.env
+.env.py
+.env.local
+.env.*.local
+.streamlit/secrets.toml
+
+# ── Python bytecode ───────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# ── Virtual environments ──────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+
+# ── Distribution / packaging ──────────────────────────────
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ── IDE and editor files ──────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ── Test artifacts ────────────────────────────────────────
+.pytest_cache/
+htmlcov/
+.coverage
+coverage.xml
+
+# ── Streamlit cache ───────────────────────────────────────
+.streamlit/cache/
